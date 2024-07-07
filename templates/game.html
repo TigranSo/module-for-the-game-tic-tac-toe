@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-image: url('{{ url_for('static', filename='img/background3.webp') }}');
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        #board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
+            justify-content: center;
+        }
+        .cell {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f0f0f0;
+            font-size: 2em;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .cell:hover {
+            background-color: #ddd;
+        }
+        h1, h2 {
+            margin-bottom: 20px;
+        }
+        #winner-message {
+            display: none;
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h2>Крестики нолики</h2>
+        <h2>Игра против: {{ opponent.username }}</h2>
+        <div id="board">
+            {% for i in range(9) %}
+            <div class="cell" data-index="{{ i }}">{{ board[i] }}</div>
+            {% endfor %}
+        </div>
+        <div id="winner-message" class="alert alert-success"></div>
+        <div class="buttons">
+            <a href="{{ url_for('game', game_id=game.id) }}" class="btn btn-info">Обновить</a>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Назад</a>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.cell').click(function() {
+                var index = $(this).data('index');
+                $.ajax({
+                    url: '{{ url_for("make_move", game_id=game.id) }}',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({square: index}),
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            var board = response.board;
+                            for (var i = 0; i < 9; i++) {
+                                $('.cell[data-index=' + i + ']').text(board[i]);
+                            }
+                            if (response.winner) {
+                                $('#winner-message').text(response.winner + ' Выиграл!').show();
+                                $('.cell').off('click');
+                            }
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

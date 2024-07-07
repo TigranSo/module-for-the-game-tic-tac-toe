@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="container-index">
+        <h1>Игра «крестики нолики»</h1>
+        <a href="{{ url_for('login') }}" class="btn btn-primary">Войти</a>
+        <a href="{{ url_for('register') }}" class="btn btn-success">Зарегистрироваться</a>
+    </div>
+{% endblock %}
+

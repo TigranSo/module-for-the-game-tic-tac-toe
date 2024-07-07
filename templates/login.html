@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <style>
+        body {
+            background-image: url('{{ url_for('static', filename='img/background1.webp') }}');
+        }
+    </style>
+    <div class="container-login">
+        <h1 class="text-center">Вход</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="email">Почта</label>
+                <input type="email" name="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Войти</button>
+        </form><br>
+        <p class="text-center">У вас нет учетной записи? <a href="{{ url_for('register') }}">Зарегистрироваться</a></p>
+    </div>
+{% endblock %}
+
+
+
+

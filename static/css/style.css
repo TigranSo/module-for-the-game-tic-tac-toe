@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("/static/img/background.webp");
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.message_alert {
+    background: rgba(32, 168, 52, 0.66); 
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 5px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    font-size: 2em;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.cell:hover {
+    background-color: #ddd;
+}
+
+/* index */
+.container-index {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.container-index h1 {
+    margin-bottom: 20px;
+}
+.container-index .btn {
+    width: 170px;
+    margin: 10px;
+}
+
+/* login register */
+.container-login {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* dashboard */
+.container-dashboard {
+    background: rgba(255, 255, 255, 0.215);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    
+}
+.container-dashboard  h1 {
+    margin-bottom: 20px;
+}
+.container-dashboard  .btn {
+    width: 150px;
+    margin: 10px;
+}
+.container-dashboard  .user-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
